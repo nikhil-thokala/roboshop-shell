@@ -38,7 +38,7 @@ fi
 
 SGID=$(aws ec2 describe-security-groups --filters Name=group-name,Values=${SG_NAME} | jq  '.SecurityGroups[].GroupId' | sed -e 's/"//g')
 if [ -z "${SGID}" ]; then
-  echo "Given Security Group does not exit"
+  echo "Given Security Group doesn't exit"
   exit 1
 fi
 
