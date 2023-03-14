@@ -2,7 +2,7 @@ echo -e "\e[35mInstalling ngnix\e[0m"
 yum install nginx -y
 
 echo -e "\e[35mRemoving old content\e[0m"
-rm -rf /usr/share/ngnix/html/*
+rm -rf /usr/share/nginx/html/*
 
 echo -e "\e[35mDownloading frontend content\e[0m"
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
