@@ -6,7 +6,7 @@ cp configs/mongodb.repo /etc/yum.repos.d/mongo.repo
 print_head() "Install Mongodb"
 yum install mongodb-org -y
 
-print_head() "enable Mongodb"
+print_head() "enabling Mongodb"
 systemctl enable mongod
 
 print_head() "Start Mongodb Service"
