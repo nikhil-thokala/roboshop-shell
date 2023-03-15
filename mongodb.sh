@@ -1,7 +1,7 @@
 source common.sh
 
 print_head() "setup Mongodb repository"
-cp configs/mongodb.repo /etc/yum.repos.d/mongodb.repo
+cp configs/mongodb.repo /etc/yum.repos.d/mongo.repo
 
 print_head() "Install Mongodb"
 yum install mongodb-org -y
