@@ -9,6 +9,8 @@ SG_NAME="allow-all"
 
 
 create_ec2() {
+  echo -e '#!/bin/bash' >/tmp/user-data
+  echo -e "\nset-hostname ${COMPONENT}" >>/tmp/user-data
   PRIVATE_IP=$(aws ec2 run-instances \
       --image-id ${AMI_ID} \
       --instance-type t3.micro \
