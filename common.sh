@@ -120,6 +120,7 @@ java() {
   status_check $?
 
 app_prereq_setup
+
   print_head "download dependencies & package"
   mvn clean package &>>${log_file}
   mv target/${component}-1.0.jar ${component}.jar &>>${log_file}
@@ -137,7 +138,8 @@ python() {
   yum install python36 gcc python3-devel -y -y &>>${log_file}
   status_check $?
 
-app_prereq_setup
+ app_prereq_setup
+
   print_head "download dependencies"
   pip3.6 install -r requirements.txt &>>${log_file}
   status_check $?
