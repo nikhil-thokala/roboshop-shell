@@ -81,7 +81,7 @@ print_head "Reload SystemD"
 systemctl daemon-reload &>>${log_file}
 status_check $?
 
-print_head "enable ${component} service"
+print_head "Enable ${component} service"
 systemctl enable ${component} &>>${log_file}
 status_check $?
 
@@ -90,4 +90,6 @@ systemctl restart ${component} &>>${log_file}
 status_check $?
 
 schema_setup
+
 }
+
