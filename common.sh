@@ -146,5 +146,5 @@ python() {
   status_check $?
 
   systemd_setup
-
-         }
+}
+}
