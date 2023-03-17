@@ -6,28 +6,26 @@ if [ -z "${mysql_root_password}" ]; then
   exit 1
 fi
 
-print_head"Disabling MySQL 8 Version"
+print_head "Disabling MySQL 8 Version"
 dnf module disable mysql -y &>>${log_file}
 status_check$?
 
-print_head"Copying MySQl Repo File"
+print_head "Copying MySQl Repo File"
 cp ${code_dir}/configs/mysql.repo /etc/yum.repos.d/mysql.repo &>>${log_file}
 status_check$?
 
-
-
-print_head"Installing MySQL Server"
+print_head "Installing MySQL Server"
 yum install mysql-community-server -y &>>${log_file}
 status_check$?
 
-print_head"Enabling MySQL Service"
+print_head "Enabling MySQL Service"
 systemctl enable mysqld &>>${log_file}
 status_check$?
 
-print_head"Start MySQL Service"
+print_head "Start MySQL Service"
 systemctl start mysqld &>>${log_file}
 status_check$?
 
-print_head"Set Root Password"
+print_head "Set Root Password"
 mysql_secure_installation --set-root-pass ${mysql_root_password} &>>${log_file}
 status_check$?
