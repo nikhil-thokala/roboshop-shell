@@ -55,7 +55,7 @@ schema_setup() {
     status_check $?
 
     print_head "Load Schema"
-    mysql -h mysql.devopsjob.online -uroot -p${mysql_root_password} < /app/schema/shipping.sql
+    mysql -h mysql.devopsjob.online -uroot -p${mysql_root_password} < /app/schema/shipping.sql &>>${log_file}
     status_check $?
   fi
 }
@@ -114,7 +114,7 @@ status_check $?
 
 java() {
   print_head "Installing Maven"
-  yum install maven -y
+  yum install maven -y &>>${log_file}
   status_check $?
 
 app_prereq_setup
