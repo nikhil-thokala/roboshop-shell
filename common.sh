@@ -135,7 +135,7 @@ app_prereq_setup
 
 python() {
 
-  print_head "Installing Python"
+  print_head "Install Python"
   yum install python36 gcc python3-devel -y &>>${log_file}
   status_check $?
 
@@ -146,5 +146,4 @@ python() {
   status_check $?
 
   systemd_setup
-}
 }
