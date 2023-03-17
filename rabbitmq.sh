@@ -15,11 +15,11 @@ curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/sc
 status_check $?
 
 print_head "Installing Erlang & RabbitMQ"
-yum install rabbitmq-server -y erlang -y &>>${log_file}
+yum install rabbitmq-server  erlang -y &>>${log_file}
 status_check $?
 
 print_head "Enable RabbitMQ Service"
-systemctl enable rabbitmq-server ${roboshop_app_password} &>>${log_file}
+systemctl enable rabbitmq-server &>>${log_file}
 status_check $?
 
 print_head "Start RabbitMQ Service"
@@ -29,7 +29,7 @@ status_check $?
 print_head "Add Application User"
 rabbitmq list_users | grep roboshop $>>${log_file}
 if [ $? -ne 0 ]; then
-  rabbitmqctl add_user roboshop &>>${log_file}
+  rabbitmqctl add_user roboshop ${roboshop_app_password} &>>${log_file}
 fi
 status_check $?
 
