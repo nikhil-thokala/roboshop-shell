@@ -130,9 +130,9 @@ app_prereq_setup
 
   #SystemD Function
   systemd_setup
-
 }
-java() {
+
+python() {
   print_head "Installing Python"
   yum install python36 gcc python3-devel -y -y &>>${log_file}
   status_check $?
