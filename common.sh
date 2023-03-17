@@ -32,7 +32,6 @@ schema_setup() {
      mongo --host mongodb.devopsjob.online </app/schema/${component}.js &>>${log_file}
      status_check $?
   fi
-
 }
 
 nodejs() {
