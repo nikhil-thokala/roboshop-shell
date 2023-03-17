@@ -135,16 +135,17 @@ app_prereq_setup
 }
 
 python() {
+   print_head "Install Python"
+    yum install python36 gcc python3-devel -y &>>${log_file}
+    status_check $?
 
-  print_head "Install Python"
-  yum install python36 gcc python3-devel -y &>>${log_file}
-  status_check $?
+   app_prereq_setup
 
- app_prereq_setup
+    print_head "download dependencies"
+    pip3.6 install -r requirements.txt &>>${log_file}
+    status_check $?
 
-  print_head "download dependencies""
-  pip3.6 install -r requirements.txt &>>${log_file}
-  status_check $?
-
-  systemd_setup
+    systemd_setup
 }
+
+
