@@ -92,26 +92,23 @@ schema_setup() {
 }
 
 nodejs() {
-print_head "configure NodeJS Repo"
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${log_file}
-status_check $?
+  print_head "Configure NodeJS Repo"
+  curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${log_file}
+  status_check $?
 
-print_head "Install NodeJS"
-yum install nodejs -y &>>${log_file}
-status_check $?
+  print_head "Install NodeJS"
+  yum install nodejs -y &>>${log_file}
+  status_check $?
 
+  app_prereq_setup
 
+  print_head "Installing NodeJS Dependencies"
+  npm install &>>${log_file}
+  status_check $?
 
- app_prereq_setup
+  schema_setup
 
-print_head "Installing NodeJs Dependencies"
-npm install &>>${log_file}
-status_check $?
-
-
- schema_setup
-
- systemd_setup
+  systemd_setup
 
 }
 
