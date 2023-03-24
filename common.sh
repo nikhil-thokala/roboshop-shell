@@ -1,42 +1,39 @@
 code_dir=$(pwd)
 log_file=/tmp/roboshop.log
-rm -rf ${log_file}
+rm -f ${log_file}
 
 print_head() {
   echo -e "\e[36m$1\e[0m"
 }
 
-status_check()
-  {
+status_check() {
   if [ $1 -eq 0 ]; then
     echo SUCCESS
   else
     echo FAILURE
-    echo "Read the file ${log_file} for more information about the error"
-    exit 2
-    fi
-  }
+    echo "Read the log file ${log_file} for more information about error"
+    exit 1
+  fi
+}
 
 systemd_setup() {
-  print_head "copying SystemD Service file"
+  print_head "Copy SystemD Service File"
   cp ${code_dir}/configs/${component}.service /etc/systemd/system/${component}.service &>>${log_file}
   status_check $?
 
   sed -i -e "s/ROBOSHOP_USER_PASSWORD/${roboshop_app_password}/" /etc/systemd/system/${component}.service &>>${log_file}
 
-
   print_head "Reload SystemD"
   systemctl daemon-reload &>>${log_file}
   status_check $?
 
-  print_head "Enable ${component} service"
+  print_head "Enable ${component} Service "
   systemctl enable ${component} &>>${log_file}
   status_check $?
 
-  print_head "Restart ${component} service"
+  print_head "Start ${component} Service"
   systemctl restart ${component} &>>${log_file}
   status_check $?
-
 }
 
 schema_setup() {
@@ -124,14 +121,15 @@ app_prereq_setup
   mv target/${component}-1.0.jar ${component}.jar &>>${log_file}
   status_check $?
 
-  #Schema Setup Function
+  # Schema Setup Function
   schema_setup
 
-  #SystemD Function
+  # SystemD Function
   systemd_setup
 }
 
 python() {
+
    print_head "Install Python"
     yum install python36 gcc python3-devel -y &>>${log_file}
     status_check $?
